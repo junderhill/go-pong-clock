@@ -21,6 +21,7 @@ func main() {
 	go pongclock.GameLoop(screen)
 
 	for {
+		screen.Size()
 		switch event := screen.PollEvent().(type) {
 		case *tcell.EventResize:
 			screen.Sync()
