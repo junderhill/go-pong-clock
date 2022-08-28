@@ -34,3 +34,21 @@ func TestNewGamePuckSizeIs1(t *testing.T) {
 	}
 
 }
+
+func TestNewGamePaddlesStartInMiddle(t *testing.T) {
+
+	screenWidth := 100
+	screenHeight := 50
+
+	expectedY := 25
+
+	game := NewGame(screenWidth, screenHeight)
+
+	if game.LeftPaddle.PositionY != expectedY {
+		t.Errorf("Expecting LeftPaddle Y Position to be %d, found %d", expectedY, game.LeftPaddle.PositionY)
+	}
+	if game.RightPaddle.PositionY != expectedY {
+		t.Errorf("Expecting RightPaddle Y Position to be %d, found %d", expectedY, game.RightPaddle.PositionY)
+	}
+
+}
