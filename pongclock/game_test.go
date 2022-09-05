@@ -1,6 +1,9 @@
 package pongclock
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 type location struct {
 	X int
@@ -36,7 +39,6 @@ func TestNewGamePuckSizeIs1(t *testing.T) {
 }
 
 func TestNewGamePaddlesStartInMiddle(t *testing.T) {
-
 	screenWidth := 100
 	screenHeight := 50
 
@@ -44,11 +46,6 @@ func TestNewGamePaddlesStartInMiddle(t *testing.T) {
 
 	game := NewGame(screenWidth, screenHeight)
 
-	if game.LeftPaddle.PositionY != expectedY {
-		t.Errorf("Expecting LeftPaddle Y Position to be %d, found %d", expectedY, game.LeftPaddle.PositionY)
-	}
-	if game.RightPaddle.PositionY != expectedY {
-		t.Errorf("Expecting RightPaddle Y Position to be %d, found %d", expectedY, game.RightPaddle.PositionY)
-	}
-
+	assert.Equal(t, game.LeftPaddle.PositionY, expectedY, "Left paddle should start in middle")
+	assert.Equalf(t, game.RightPaddle.PositionY, expectedY, "Right paddle should start in middle")
 }
