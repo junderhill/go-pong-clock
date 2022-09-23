@@ -1,48 +1,47 @@
 package pongclock
 
-import "math"
+import (
+	"math"
+
+	"github.com/gdamore/tcell/v2"
+)
 
 type Game struct {
 	Puck        Puck
 	LeftPaddle  Paddle
 	RightPaddle Paddle
+	Screen      *tcell.Screen
 }
 
-const PuckSize int = 1
-
-func NewGame(screenWidth int, screenHeight int) *Game {
+func NewGame(screenWidth int, screenHeight int, screen *tcell.Screen) *Game {
 	return &Game{
-		Puck: Puck{
-			SpeedX: 0,
-			SpeedY: 0,
-			GameObject: GameObject{
-				PositionX: findMiddle(screenWidth),
-				PositionY: findMiddle(screenHeight),
-				Height:    PuckSize,
-				Width:     PuckSize,
-			},
-		},
+		Puck: *NewPuck(findMiddle(screenWidth), findMiddle(screenHeight)),
 		LeftPaddle: Paddle{
 			SpeedY: 0,
 			GameObject: GameObject{
-				PositionX: 0,
+				PositionX: 5,
 				PositionY: findMiddle(screenHeight),
-				Height:    0,
-				Width:     0,
+				Height:    5,
+				Width:     1,
 			},
 		},
 		RightPaddle: Paddle{
 			SpeedY: 0,
 			GameObject: GameObject{
-				PositionX: 0,
+				PositionX: screenWidth - 5,
 				PositionY: findMiddle(screenHeight),
-				Height:    0,
-				Width:     0,
+				Height:    5,
+				Width:     1,
 			},
 		},
+		Screen: screen,
 	}
 }
 
 func findMiddle(dimension int) int {
 	return int(math.Round(float64(dimension / 2)))
+}
+
+func (g *Game) UpdateGame() {
+	g.Puck.UpdatePuckPosition()
 }

@@ -12,13 +12,20 @@ func main() {
 	screen, err := tcell.NewScreen()
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("%+v", err)
+	}
+	if err := screen.Init(); err != nil {
+		log.Fatalf("%+v", err)
 	}
 
 	defStyle := tcell.StyleDefault.Background(tcell.ColorBlack).Foreground(tcell.ColorBlack)
 	screen.SetStyle(defStyle)
 
-	go pongclock.GameLoop(screen)
+	width, height := screen.Size()
+
+	game := pongclock.NewGame(width, height, &screen)
+
+	go pongclock.GameLoop(*game)
 
 	for {
 		screen.Size()

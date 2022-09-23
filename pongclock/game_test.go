@@ -19,7 +19,7 @@ func TestNewGamePlacesPuckInCenter(t *testing.T) {
 		Y: 25,
 	}
 
-	game := NewGame(screenWidth, screenHeight)
+	game := NewGame(screenWidth, screenHeight, nil)
 
 	if game.Puck.PositionX != expectedLocation.X || game.Puck.PositionY != expectedLocation.Y {
 		t.Errorf("Puck Position %+v is not as expected: %+v", game.Puck, expectedLocation)
@@ -30,7 +30,7 @@ func TestNewGamePuckSizeIs1(t *testing.T) {
 
 	expectedSize := 1
 
-	game := NewGame(100, 100)
+	game := NewGame(100, 100, nil)
 
 	if game.Puck.Height != expectedSize || game.Puck.Width != expectedSize {
 		t.Errorf("New Game Puck Size unexpected. Expecting %d, Puck %+v", expectedSize, game.Puck)
@@ -44,7 +44,7 @@ func TestNewGamePaddlesStartInMiddle(t *testing.T) {
 
 	expectedY := 25
 
-	game := NewGame(screenWidth, screenHeight)
+	game := NewGame(screenWidth, screenHeight, nil)
 
 	assert.Equal(t, game.LeftPaddle.PositionY, expectedY, "Left paddle should start in middle")
 	assert.Equalf(t, game.RightPaddle.PositionY, expectedY, "Right paddle should start in middle")
