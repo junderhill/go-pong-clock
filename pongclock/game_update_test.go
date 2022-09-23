@@ -19,3 +19,31 @@ func TestPuckPositionIsUpdated(t *testing.T) {
 		t.Errorf("Puck Y Position is %d Should be %d", game.Puck.PositionY, expectedY)
 	}
 }
+
+func TestLeftPaddlePositionIsUpdated(t *testing.T) {
+	game := NewGame(500, 500, nil)
+
+	startY := game.LeftPaddle.PositionY
+
+	game.UpdateGame()
+
+	expectedY := startY + game.LeftPaddle.SpeedY
+
+	if game.LeftPaddle.PositionY != expectedY {
+		t.Errorf("Left paddle Y position is %d Should be %d", game.LeftPaddle.PositionY, expectedY)
+	}
+}
+
+func TestRightPaddlePositionIsUpdated(t *testing.T) {
+	game := NewGame(500, 500, nil)
+
+	startY := game.RightPaddle.PositionY
+
+	game.UpdateGame()
+
+	expectedY := startY + game.RightPaddle.SpeedY
+
+	if game.RightPaddle.PositionY != expectedY {
+		t.Errorf("Left paddle Y position is %d Should be %d", game.LeftPaddle.PositionY, expectedY)
+	}
+}

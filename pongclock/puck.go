@@ -51,6 +51,10 @@ func (p *Puck) UpdatePuckPosition() {
 	p.PositionY += p.SpeedY
 }
 
+func (p *Paddle) UpdatePaddlePosition() {
+	p.PositionY += p.SpeedY
+}
+
 func (p *Puck) Display() rune {
 	return '\u25CF'
 }

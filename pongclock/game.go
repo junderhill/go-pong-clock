@@ -17,7 +17,7 @@ func NewGame(screenWidth int, screenHeight int, screen *tcell.Screen) *Game {
 	return &Game{
 		Puck: *NewPuck(findMiddle(screenWidth), findMiddle(screenHeight)),
 		LeftPaddle: Paddle{
-			SpeedY: 0,
+			SpeedY: -1,
 			GameObject: GameObject{
 				PositionX: 5,
 				PositionY: findMiddle(screenHeight),
@@ -26,7 +26,7 @@ func NewGame(screenWidth int, screenHeight int, screen *tcell.Screen) *Game {
 			},
 		},
 		RightPaddle: Paddle{
-			SpeedY: 0,
+			SpeedY: 1,
 			GameObject: GameObject{
 				PositionX: screenWidth - 5,
 				PositionY: findMiddle(screenHeight),
@@ -44,4 +44,6 @@ func findMiddle(dimension int) int {
 
 func (g *Game) UpdateGame() {
 	g.Puck.UpdatePuckPosition()
+	g.LeftPaddle.UpdatePaddlePosition()
+	g.RightPaddle.UpdatePaddlePosition()
 }
