@@ -46,4 +46,13 @@ func (g *Game) UpdateGame() {
 	g.Puck.UpdatePuckPosition()
 	g.LeftPaddle.UpdatePaddlePosition()
 	g.RightPaddle.UpdatePaddlePosition()
+
+	_, height := (*g.Screen).Size()
+	if g.RightPaddle.CheckForScreenCollisions(height) {
+		g.RightPaddle.ReverseDirection()
+	}
+
+	if g.LeftPaddle.CheckForScreenCollisions(height) {
+		g.LeftPaddle.ReverseDirection()
+	}
 }

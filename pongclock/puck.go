@@ -2,26 +2,11 @@ package pongclock
 
 import (
 	"math/rand"
-	"strings"
 	"time"
 )
 
-type GameObject struct {
-	PositionX int
-	PositionY int
-
-	Height int
-	Width  int
-}
-
 type Puck struct {
 	SpeedX int
-	SpeedY int
-
-	GameObject
-}
-
-type Paddle struct {
 	SpeedY int
 
 	GameObject
@@ -51,14 +36,6 @@ func (p *Puck) UpdatePuckPosition() {
 	p.PositionY += p.SpeedY
 }
 
-func (p *Paddle) UpdatePaddlePosition() {
-	p.PositionY += p.SpeedY
-}
-
 func (p *Puck) Display() rune {
 	return '\u25CF'
-}
-
-func (p *Paddle) Display() string {
-	return strings.Repeat(" ", p.Height)
 }
