@@ -47,3 +47,16 @@ func TestRightPaddlePositionIsUpdated(t *testing.T) {
 		t.Errorf("Left paddle Y position is %d Should be %d", game.LeftPaddle.PositionY, expectedY)
 	}
 }
+
+func TestPuckCollisionWithTopReversesYDirection(t *testing.T) {
+	game := NewGame(500, 500, nil)
+
+	game.Puck.PositionY = 0
+	game.Puck.SpeedY = -1
+
+	game.UpdateGame()
+
+	if game.Puck.SpeedY == -1 {
+		t.Errorf("Expected Puck SpeedY to be reversed but is %d", game.Puck.SpeedY)
+	}
+}
